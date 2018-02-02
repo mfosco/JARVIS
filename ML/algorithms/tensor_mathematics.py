@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import math
 
 # printing a regular tensor, oh boy
 
@@ -121,4 +122,24 @@ square()    # square of one input tensor
 
 '''
 Special ML functions:
+digamma()   # Psi function, the derivative of the lgamma() function
+erf()       # Gaussian error function, element-wise of one tensor
+erfc()      # complimentary error function of one tensor
+igamma()    # lower regularized incomplete gamma function
+lbeta()     # natural log of the absolute value of the beta function
+lgamma()    # natural log of the absolute value of the gamma function
+squared_differece()     # computes the square of the differences between 2 tensors
 '''
+
+# making a composite function
+# tan(pi/4) = 1
+print(sess.run(tf.div(tf.sin(math.pi/4.), tf.cos(math.pi/4.))))
+
+# 3x^2 - x + 10
+def custom_polynomial(value):
+    return(tf.subtract(3 * tf.square(value), value) + 10)
+
+print(sess.run(custom_polynomial(11)))
+
+#########################################
+# Activation functions
