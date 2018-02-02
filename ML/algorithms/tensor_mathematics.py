@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import math
 
+
 # printing a regular tensor, oh boy
 
 sess    = tf.Session()
@@ -145,3 +146,21 @@ print(sess.run(custom_polynomial(11)))
 # Activation functions
 # ReLU
 print(sess.run(tf.nn.relu([-3., 3., 10., -4])))
+
+# capping relu function at some value, 6 in this case
+print(sess.run(tf.nn.relu6([-3., 3., 10.])))
+
+# that vanishing sigmoid
+print(sess.run(tf.nn.sigmoid([-1., 0., 1.])))
+
+# tanh ie ((exp(x)-exp(-x))/(exp(x)+exp(-x))
+print(sess.run(tf.nn.tanh([-1., 0., 1.])))
+
+#softsign function ie x/(abs(x) + 1, so basically a continuous version of sin
+print(sess.run(tf.nn.softsign([-1., 0., -1.])))
+
+# softplus, ie smooth version of ReLU, form: log(exp(x) + 1)
+print(sess.run(tf.nn.softplus([-1., 0., -1.])))
+
+# Exponential Linear Unit (ELU)
+print(sess.run(tf.nn.elu([-1., 0., 1.])))
