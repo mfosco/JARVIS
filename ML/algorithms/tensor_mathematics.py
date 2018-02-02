@@ -144,4 +144,4 @@ print(sess.run(custom_polynomial(11)))
 #########################################
 # Activation functions
 # ReLU
-print(sess.run(tf.nn.relu([-3., 3., 10.])))
+print(sess.run(tf.nn.relu([-3., 3., 10., -4])))
