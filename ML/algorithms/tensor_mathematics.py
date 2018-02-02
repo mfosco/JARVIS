@@ -79,3 +79,46 @@ print(sess.run(tf.matrix_determinant(D)))
 # Inverse
 print(sess.run(tf.matrix_inverse(D)))
 
+# Cholesky
+print(sess.run(tf.cholesky(identity_matrix)))
+# eigen values and eigenvectors, returns things as eigenvalues, matrix of eigenvectors
+print(sess.run(tf.self_adjoint_eig(D)))
+
+# note, div() returns the same type as the inputs (so it returns the floor of the division if inputs are ints)
+# truediv() will return ints turned into floats
+print(sess.run(tf.div(3,4))) # ret 0
+print(sess.run(tf.truediv(3,4))) # ret .75
+
+# if have floats and want integer division, use "floordiv()"
+print(sess.run(tf.floordiv(3.0, 4.0)))
+
+# don't forget mod:
+print(sess.run(tf.mod(22.0, 5.0)))
+
+# cross product only defived for 2 three-dimensional vectors
+print(sess.run(tf.cross([1., 0., 0.], [0., 1., 0.])))
+
+'''
+list of math functions in tf:
+abs()
+ceil()
+cos()
+exp()
+floor()
+inv()   # multiplicative inverse
+log()
+maximum()   # element-wise max of 2 tensors
+minimum()   # element-wise min of 2 tensors
+neg()       # negative of one input tensor
+pow()       # first tensor raided to the second tensor element-wise
+round()     # round 1 input tensor
+rsqrt()     # 1 over the square root of one tensor
+sign()      # returns -1, 0 or 1 depending on the sign of the tensor
+sin() 
+sqrt()      # squre root of one input tensor
+square()    # square of one input tensor
+'''
+
+'''
+Special ML functions:
+'''
