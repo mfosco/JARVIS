@@ -66,3 +66,16 @@ print(sess.run(A))
 print(sess.run(B))
 print(sess.run(C))
 print(sess.run(D))
+
+# addition and subtraction
+print(sess.run(A+B))
+print(sess.run(B-B))
+# multiplication
+print(sess.run(tf.matmul(B, identity_matrix))) #can specify whether or not to transpose arguments before multiplication in matmul()
+# transpose
+print(sess.run(tf.transpose(C))) # re initializing gives us different values from before
+# determinant:
+print(sess.run(tf.matrix_determinant(D)))
+# Inverse
+print(sess.run(tf.matrix_inverse(D)))
+
