@@ -84,3 +84,7 @@ targets     = tf.fill([500,], 1.)
 hinge_y_vals    = tf.maximum(0., 1. - tf.multiply(target, x_vals))
 hinge_y_out     = sess.run(hinge_y_vals)
 
+
+
+
+
