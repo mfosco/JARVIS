@@ -37,3 +37,7 @@ def get_indices_of_item_wights(arr, limit):
         indx += 1
 
     return []
+
+def flight_path(points):
+    maxy = max([x[2] for x in points])
+    return maxy - points[0][2]
