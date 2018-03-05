@@ -252,3 +252,66 @@ def spiral_copy(inputMatrix):
             left_wall += 1
 
     return res
+
+
+def find_array_quadruplet(arr, s):
+    arr.sort()
+    lim = len(arr)
+
+    for i in range(lim):
+        new_sum = s - arr[i]
+        if i + 1 < lim:
+            three_spots = find_three_numbers(arr[i + 1:], new_sum)
+
+            if three_spots != None:
+                tmpy = [arr[i]] + [x for x in three_spots]
+                ze_tmp = sorted(tmpy)
+                return ze_tmp
+    return []
+
+
+def find_three_numbers(arr, summy):
+    lim = len(arr)
+
+    for i in range(lim):
+        new_sum = summy - arr[i]
+        if i + 1 < lim:
+            two_spots = find_two_numbers(arr[0:i] + arr[i + 1:], new_sum)
+            if two_spots != None:
+                return [arr[i]] + two_spots
+    return None
+
+
+def find_two_numbers(arr, summy):
+    '''
+    assume arr is sorted
+    '''
+    start = 0
+    end = len(arr) - 1
+
+    while start != end:
+        tmp = arr[start] + arr[end]
+        if tmp < summy:
+            start += 1
+        elif tmp > summy:
+            end -= 1
+        else:
+            return [arr[start], arr[end]]
+    return None
+
+
+def index_equals_value_search(arr):
+    lim = len(arr)
+    left = 0
+    right = lim - 1
+
+    while left <= right:
+        i = int((left + right) / 2)
+        if arr[i] - i < 0:
+            left = i + 1
+        elif (arr[i] - i == 0) and ((i == 0) or arr[i - 1] - (i - 1) < 0):
+            return i
+        else:
+            right = i - 1
+
+    return -1
