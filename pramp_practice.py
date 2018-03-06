@@ -239,7 +239,6 @@ def spiral_copy(inputMatrix):
             res.append(inputMatrix[j][right_wall])
         right_wall -= 1
 
-        row_loc = bottom_wall
         if top_wall <= bottom_wall:
             for i in range(right_wall, left_wall - 1, -1):
                 res.append(inputMatrix[bottom_wall][i])
@@ -315,3 +314,52 @@ def index_equals_value_search(arr):
             right = i - 1
 
     return -1
+
+
+import math
+
+
+def root(x, n):
+    if x == 0:
+        return 0
+
+    epsilon = .001
+    start = 0
+    end = max(1, x)
+    guess = (end + start) / 2
+
+    tmp_cost = cost(guess, x, n)
+
+    while (end - start) > epsilon:
+        if tmp_cost < 0:
+            # if tmp_cost > -1*epsilon:
+            #  return guess
+            end = guess - epsilon
+            guess = (end + start) / 2
+        else:
+            # if tmp_cost < epsilon:
+            #  return guess
+            start = guess + epsilon
+            guess = (end + start) / 2
+        tmp_cost = cost(guess, x, n)
+    return guess
+
+
+def cost(guess, x, n):
+    return x - x_to_n(guess, n)
+
+
+'''
+x_to_n(9, 5) = 9^5
+'''
+
+
+def x_to_n(x, n):  # 9*9*9*9*9
+    if n == 0:
+        return 1
+
+    res = 1
+    while n > 0:
+        res *= x
+        n -= 1
+    return res
