@@ -363,3 +363,136 @@ def x_to_n(x, n):  # 9*9*9*9*9
         res *= x
         n -= 1
     return res
+
+
+##########################################################
+# CODE INSTRUCTIONS:                                     #
+# 1) The method findLargestSmallerKey you're asked       #
+#    to implement is located at line 30.                 #
+# 2) Use the helper code below to implement it.          #
+# 3) In a nutshell, the helper code allows you to        #
+#    to build a Binary Search Tree.                      #
+# 4) Jump to line 71 to see an example for how the       #
+#    helper code is used to test findLargestSmallerKey.  #
+##########################################################
+
+
+# A node
+class Node:
+    # Constructor to create a new node
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+        self.parent = None
+
+
+# A binary search tree
+class BinarySearchTree:
+    # Constructor to create a new BST
+    def __init__(self):
+        self.root = None
+
+    def find_largest_smaller_key(self, num, holder=-1):
+        root = self.root
+        result = -1
+
+        while root != None:
+            if root.key < num:
+                result = root.key
+                root = root.right
+            else:
+                root = root.left
+        return result
+
+        # pass # your code goes here
+
+    # Given a binary search tree and a number, inserts a
+    # new node with the given number in the correct place
+    # in the tree. Returns the new root pointer which the
+    # caller should then use(the standard trick to avoid
+    # using reference parameters)
+    def insert(self, key):
+
+        # 1) If tree is empty, create the root
+        if (self.root is None):
+            self.root = Node(key)
+            return
+
+        # 2) Otherwise, create a node with the key
+        #    and traverse down the tree to find where to
+        #    to insert the new node
+        currentNode = self.root
+        newNode = Node(key)
+
+        while (currentNode is not None):
+            if (key < currentNode.key):
+                if (currentNode.left is None):
+                    currentNode.left = newNode
+                    newNode.parent = currentNode
+                    break
+                else:
+                    currentNode = currentNode.left
+            else:
+                if (currentNode.right is None):
+                    currentNode.right = newNode
+                    newNode.parent = currentNode
+                    break
+                else:
+                    currentNode = currentNode.right
+
+
+#########################################
+# Driver program to test above function #
+#########################################
+
+bst = BinarySearchTree()
+
+# Create the tree given in the above diagram
+bst.insert(20)
+bst.insert(9);
+bst.insert(25);
+bst.insert(5);
+bst.insert(12);
+bst.insert(11);
+bst.insert(14);
+
+result = bst.find_largest_smaller_key(17)
+
+print("Largest smaller number is %d " % (result))
+
+
+def is_match(text, pattern):
+    # pass # your code goes here
+
+    text_indx = 0
+    pattern_indx = 0
+    return match_helper(text, 0, pattern, 0)
+
+
+def match_helper(text, text_indx, pattern, pattern_indx):
+    len_text = len(text)
+    len_pattern = len(pattern)
+
+    if text_indx >= len_text:
+        if pattern_indx >= len_pattern:
+            return True
+        else:
+            while pattern_indx < len_pattern:
+                if pattern_indx + 1 < len_pattern and pattern[pattern_indx + 1] == '*':
+                    pattern_indx += 2
+                else:
+                    return False
+            return text_indx == len_text and pattern_indx == len_pattern
+    elif pattern_indx == len_pattern and text_indx < len_text:
+        return False
+    elif (pattern_indx + 1) < len_pattern and pattern[pattern_indx + 1] == '*':
+        if pattern[pattern_indx] == '.' or pattern[pattern_indx] == text[text_indx]:
+            return match_helper(text, text_indx + 1, pattern, pattern_indx) or match_helper(text, text_indx, pattern,
+                                                                                            pattern_indx + 2)
+        else:
+            return match_helper(text, text_indx, pattern, pattern_indx + 2)
+    elif pattern[pattern_indx] == '.' or pattern[pattern_indx] == text[text_indx]:
+        return match_helper(text, text_indx + 1, pattern, pattern_indx + 1)
+    else:
+        return False
