@@ -393,7 +393,7 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None
 
-    def find_largest_smaller_key(self, num, holder=-1):
+    def find_largest_smaller_key(self, num):
         root = self.root
         result = -1
 
@@ -463,10 +463,6 @@ print("Largest smaller number is %d " % (result))
 
 
 def is_match(text, pattern):
-    # pass # your code goes here
-
-    text_indx = 0
-    pattern_indx = 0
     return match_helper(text, 0, pattern, 0)
 
 
@@ -496,3 +492,5 @@ def match_helper(text, text_indx, pattern, pattern_indx):
         return match_helper(text, text_indx + 1, pattern, pattern_indx + 1)
     else:
         return False
+
+
